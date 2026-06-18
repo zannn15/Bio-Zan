@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Under Maintenance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0B0E17;
+      --surface:  #111520;
+      --border:   #1E2438;
+      --accent:   #4DFFC3;
+      --accent2:  #7B61FF;
+      --text:     #E8EAF0;
+      --muted:    #5A607A;
+      --danger:   #FF5B5B;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow: hidden;
+    }
+
+    /* ── grid bg ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: .45;
+      z-index: 0;
+    }
+
+    /* ── glow blobs ── */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: .18;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .blob-1 { width: 520px; height: 520px; background: var(--accent2); top: -160px; left: -120px; }
+    .blob-2 { width: 420px; height: 420px; background: var(--accent);  bottom: -140px; right: -80px; }
+
+    /* ── scan line ── */
+    @keyframes scan {
+      0%   { transform: translateY(-100%); }
+      100% { transform: translateY(100vh); }
+    }
+    body::after {
+      content: '';
+      position: fixed; left: 0; top: 0; width: 100%; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      animation: scan 4s linear infinite;
+      opacity: .35;
+      z-index: 1;
+    }
+
+    /* ── layout ── */
+    .stage {
+      position: relative; z-index: 2;
+      height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3.5rem 3rem;
+      max-width: 560px; width: 100%;
+      position: relative;
+      box-shadow: 0 0 0 1px var(--border), 0 32px 80px rgba(0,0,0,.55);
+    }
+
+    /* corner accent */
+    .card::before, .card::after {
+      content: '';
+      position: absolute;
+      width: 18px; height: 18px;
+      border-color: var(--accent);
+      border-style: solid;
+    }
+    .card::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; border-radius: 20px 0 0 0; }
+    .card::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; border-radius: 0 0 20px 0; }
+
+    /* ── status pill ── */
+    .status-pill {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(255, 91, 91, .08);
+      border: 1px solid rgba(255, 91, 91, .25);
+      border-radius: 99px;
+      padding: .35rem 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      color: var(--danger);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      background: var(--danger);
+      border-radius: 50%;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .4; transform: scale(.7); }
+    }
+
+    /* ── heading ── */
+    h1 {
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      margin-bottom: 1rem;
+    }
+    h1 span {
+      background: linear-gradient(120deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── body copy ── */
+    p {
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.7;
+      margin-bottom: 2.4rem;
+    }
+
+    /* ── progress bar ── */
+    .progress-wrap {
+      margin-bottom: 2.4rem;
+    }
+    .progress-label {
+      display: flex; justify-content: space-between;
+      font-family: 'Space Mono', monospace;
+      font-size: .72rem;
+      color: var(--muted);
+      letter-spacing: .04em;
+      margin-bottom: .6rem;
+    }
+    .progress-label span:last-child { color: var(--accent); }
+    .bar-track {
+      height: 4px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      width: 68%;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      border-radius: 99px;
+      position: relative;
+    }
+    .bar-fill::after {
+      content: '';
+      position: absolute; right: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    /* ── divider ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin-bottom: 1.8rem;
+    }
+
+    /* ── meta row ── */
+    .meta {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .meta-item {
+      flex: 1; min-width: 120px;
+    }
+    .meta-label {
+      font-family: 'Space Mono', monospace;
+      font-size: .65rem;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: .3rem;
+    }
+    .meta-value {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .meta-value.accent { color: var(--accent); }
+
+    /* ── responsive ── */
+    @media (max-width: 480px) {
+      .card { padding: 2.5rem 1.75rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::after, .dot { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="stage">
+    <div class="card">
+      <div class="status-pill">
+        <span class="dot"></span>
+        System Offline
+      </div>
+
+      <h1>The website is<br/><span>under maintenance.</span></h1>
+
+      <p>
+        We're making some improvements to deliver a better experience.
+        Everything will be back up shortly — thanks for your patience.
+      </p>
+
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span>Restoration progress</span>
+          <span>68%</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill"></div>
+        </div>
+      </div>
+
+      <hr class="divider"/>
+
+      <div class="meta">
+        <div class="meta-item">
+          <div class="meta-label">Estimated back</div>
+          <div class="meta-value accent">In a few hours</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Status</div>
+          <div class="meta-value">Scheduled work</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Contact</div>
+          <div class="meta-value">hello@example.com</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
