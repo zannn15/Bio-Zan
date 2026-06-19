@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZansPiw - Quantum Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #03000a;
+            --purple-bright: #bc61f5;
+            --purple-glow: #a855f7;
+            --purple-deep: #4c1d95;
+            --glass-bg: rgba(13, 8, 28, 0.45);
+            --glass-border: rgba(168, 85, 247, 0.25);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --neon-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Cyber Mesh / Animasi Partikel */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: 
+                linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: -20%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.15) 0%, transparent 70%);
+            z-index: -1;
+            animation: floatGlow 12s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 80px) scale(1.2); }
+        }
+
+        /* Header / Navbar Futuristik */
+        .navbar {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 20px;
+            border-bottom: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box {
+            background: linear-gradient(135deg, var(--purple-glow), var(--purple-deep));
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: var(--neon-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #ffffff, var(--purple-bright));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Search Bar & AI Button Integration */
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(10, 5, 20, 0.8);
+            border: 1px solid var(--glass-border);
+            padding: 6px 6px 6px 18px;
+            border-radius: 50px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+            transition: border-color 0.3s;
+        }
+
+        .nav-controls:focus-within {
+            border-color: var(--purple-bright);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+        }
+
+        .search-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .ai-btn {
+            background: #ffffff;
+            color: #03000a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .ai-btn:hover {
+            background: var(--purple-bright);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--neon-shadow);
+        }
+
+        /* Main Layout - Aliran Vertikal */
+        .main-content {
+            width: 100%;
+            max-width: 680px;
+            padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        /* Top Cyber Badge */
+        .badge-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .premium-badge {
+            background: rgba(168, 85, 247, 0.07);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #d8b4fe;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: inset 0 0 10px rgba(168, 85, 247, 0.1);
+        }
+
+        .pulse-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #06b6d4; /* Neon cyan dot */
+            border-radius: 50%;
+            box-shadow: 0 0 8px #06b6d4;
+            animation: pulse 1.8s infinite;
+        }
+
+        /* Hero Text / Header Nama */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .hero-section h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #ffffff 30%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .hero-section p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        /* Elegant Glassmorphism Cards */
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 28px;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s, border-color 0.4s;
+        }
+
+        .card:hover {
+            border-color: rgba(168, 85, 247, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 22px;
+            color: var(--purple-bright);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Row Data Items */
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .info-item:hover {
+            background: rgba(168, 85, 247, 0.05);
+            border-color: rgba(168, 85, 247, 0.2);
+            transform: scale(1.01);
+        }
+
+        .info-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* Grid Status Spek */
+        .sys-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .sys-box {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            padding: 18px;
+            border-radius: 16px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        .sys-box:hover {
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .sys-box div:first-child {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .sys-box div:last-child {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.5; box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4); }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 12px 4px rgba(6, 182, 212, 0.2); }
+            100% { transform: scale(0.9); opacity: 0.5; box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4); }
+        }
+
+        /* Responsif untuk Smartphone */
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px 16px;
+            }
+            
+            .nav-controls {
+                max-width: 100%;
+            }
+
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+
+            .sys-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Glow Navigation -->
+    <nav class="navbar">
+        <div class="logo-section">
+            <div class="logo-box">V</div>
+            <span class="logo-title">Vizzan</span>
+        </div>
+        <div class="nav-controls">
+            <input type="text" class="search-input" placeholder="Mau cari apa?">
+            <button class="ai-btn" onclick="window.location.href='AI.html'">AI Chat</button>
+        </div>
+    </nav>
+
+    <!-- Downward Profile Content -->
+    <main class="main-content">
+        
+        <!-- Cyber Badge Header -->
+        <div class="badge-container">
+            <div class="premium-badge">
+                <span class="pulse-dot"></span> Profile
+            </div>
+        </div>
+
+        <!-- Identity Title (Hero) -->
+        <section class="hero-section">
+            <h1>Vizzan Imda Nurrohman</h1>
+            <p></p>
+        </section>
+
+        <!-- Core Identity Matrix -->
+        <section class="card">
+            <div class="card-title">
+                <span>🧬</span> Indentitas
+            </div>
+            <div class="info-list">
+                <div class="info-item">
+                    <span class="info-label">Nama :</span>
+                    <span class="info-value">Vizzan Imda Nurrohman</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Lahir pada :</span>
+                    <span class="info-value">15 September 2013</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Asal :</span>
+                    <span class="info-value">Bekasi</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trajectory Vector (Cita-cita & Hobi) -->
+        <section class="card">
+            <div class="card-title">
+                <span>🛰️</span> Hobi dan Cita cita
+            </div>
+            <div class="info-list">
+                <div class="info-item">
+                    <span class="info-label">Cita - Cita :</span>
+                    <span class="info-value" style="color: var(--purple-bright); text-shadow: 0 0 10px rgba(188,97,245,0.3);">Dokter 🩺</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Hobi :</span>
+                    <span class="info-value">Bersepeda🚲</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quantum Diagnostics Panel -->
+        <section class="card">
+            <div class="card-title">
+                <span>⚙️</span> System Diagnostics
+            </div>
+            <div class="sys-grid">
+                <div class="sys-box">
+                    <div>Runtime Engine</div>
+                    <div style="color: #ffffff;">Active</div>
+                </div>
+                <div class="sys-box">
+                    <div>Security Protocol</div>
+                    <div style="color: #06b6d4; text-shadow: 0 0 10px rgba(6,182,212,0.3);">Cloudflare secure</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
